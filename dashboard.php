@@ -18,6 +18,8 @@ $stmt = $pdo->prepare("SELECT username, role FROM users WHERE id = ?");
 $stmt->execute([$user_id]);
 $user = $stmt->fetch();
 
+logAction($pdo, $_SESSION['user_id'], "SELECT", "tasks", "N/A", "Viewed all tasks.");
+
 // Check if user exists
 if (!$user) {
     header('Location: logout.php');
@@ -41,6 +43,7 @@ $username = $user['username'];
                 <li><a href="admin/manage_users.php">Manage Users</a></li>
                 <li><a href="admin/view_tasks.php">View All Tasks</a></li>
                 <li><a href="admin/reports.php">Generate Reports</a></li>
+                <li><a href="admin/view_logs.php">View Logs</a></li>
             </ul>
         <?php elseif ($role === 'manager'): ?>
             <h3>Manager Panel</h3>

@@ -2,12 +2,6 @@
 session_start();
 include 'includes/db.php';
 
-// If the user is not logged in, redirect them to the login page
-if (!isset($_SESSION['user_id'])) {
-    header('Location: index.php');
-    exit;
-}
-
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
