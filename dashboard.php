@@ -18,7 +18,6 @@ $stmt = $pdo->prepare("SELECT username, role FROM users WHERE id = ?");
 $stmt->execute([$user_id]);
 $user = $stmt->fetch();
 
-logAction($pdo, $_SESSION['user_id'], "SELECT", "tasks", "N/A", "Viewed all tasks.");
 
 // Check if user exists
 if (!$user) {
@@ -42,22 +41,19 @@ $username = $user['username'];
             <ul>
                 <li><a href="admin/manage_users.php">Manage Users</a></li>
                 <li><a href="admin/view_tasks.php">View All Tasks</a></li>
-                <li><a href="admin/reports.php">Generate Reports</a></li>
                 <li><a href="admin/view_logs.php">View Logs</a></li>
+                <li><a href="admin/user_task_activity_summary.php">User Activity Summary</a></li>
             </ul>
         <?php elseif ($role === 'manager'): ?>
             <h3>Manager Panel</h3>
             <ul>
                 <li><a href="manager/create_task.php">Create Task</a></li>
-                <li><a href="manager/assign_task.php">Assign Task</a></li>
                 <li><a href="manager/view_tasks.php">View Tasks</a></li>
             </ul>
         <?php elseif ($role === 'employee'): ?>
             <h3>Employee Panel</h3>
             <ul>
                 <li><a href="employee/view_tasks.php">View Assigned Tasks</a></li>
-                <li><a href="employee/update_task.php">Update Task Status</a></li>
-                <li><a href="employee/comments.php">Add Comments</a></li>
             </ul>
         <?php endif; ?>
     </div>

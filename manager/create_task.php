@@ -2,6 +2,9 @@
 include '../includes/db.php';
 session_start();
 
+$user_id = $_SESSION['user_id']; // Get the logged-in user ID
+$pdo->exec("SET myapp.current_user_id = '$user_id'");
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Sanitize and fetch form data
     $title = htmlspecialchars(trim($_POST['title']));
@@ -15,11 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt = $pdo->prepare("INSERT INTO tasks (title, description, assigned_to, created_by, deadline, priority) VALUES (?, ?, ?, ?, ?, ?)");
     $stmt->execute([$title, $description, $assigned_to, $created_by, $deadline, $priority]);
 
- // Log the action (task creation)
- logAction($pdo, $created_by, "INSERT", "tasks", "title, description, assigned_to, priority", "Created a new task with title '$title'");
-     
     // Redirect to the dashboard after creating the task
-    header('Location: /dashboard.php');
+    header('Location: ../dashboard.php');
     exit; // Ensure no further code is executed after the redirect
 }
 

@@ -6,42 +6,58 @@ include '../includes/auth.php';
 // Check if the user has 'admin' role
 requireRole('admin'); // Only admins can access this page
 
-// Fetch tasks from the database (with optional filtering)
+// Initialize filter parameters for task list
 $whereClauses = [];
 $params = [];
 
+// Apply filters if provided
 if (isset($_POST['priority']) && $_POST['priority'] !== '') {
-    $whereClauses[] = "priority = ?";
+    $whereClauses[] = "t.priority = ?";
     $params[] = $_POST['priority'];
 }
 
 if (isset($_POST['assigned_to']) && $_POST['assigned_to'] !== '') {
-    $whereClauses[] = "assigned_to = ?";
+    $whereClauses[] = "t.assigned_to = ?";
     $params[] = $_POST['assigned_to'];
 }
 
 if (isset($_POST['deadline']) && $_POST['deadline'] !== '') {
-    $whereClauses[] = "deadline = ?";
+    $whereClauses[] = "t.deadline = ?";
     $params[] = $_POST['deadline'];
 }
 
-// Build query with filters
-$query = "SELECT t.id, t.title, t.description, t.assigned_to, t.created_by, t.deadline, t.priority, u.username AS assigned_to_name 
-          FROM tasks t 
-          LEFT JOIN users u ON t.assigned_to = u.id";
+// Fetch tasks
+$query = "
+    SELECT t.task_id, t.title, t.priority, t.status, t.deadline, u.username AS assigned_to_name
+    FROM all_user_task_summary(NULL) t
+    LEFT JOIN users u ON t.assigned_to = u.id
+    WHERE u.role = 'employee'  -- Ensure that the assigned user is an employee
+";
 
 if (!empty($whereClauses)) {
-    $query .= " WHERE " . implode(" AND ", $whereClauses);
+    $query .= " AND " . implode(" AND ", $whereClauses);
 }
 
 $stmt = $pdo->prepare($query);
 $stmt->execute($params);
 $tasks = $stmt->fetchAll();
 
+
+
+
 // Fetch users for the "assigned to" filter
 $usersStmt = $pdo->prepare("SELECT id, username FROM users WHERE role = 'employee'");
 $usersStmt->execute();
 $users = $usersStmt->fetchAll();
+
+// Fetch task status summary for all users
+$taskStatusSummaryStmt = $pdo->query("
+    SELECT u.username, s.total_tasks, s.not_started, s.in_progress, s.completed
+    FROM task_status_summary s
+    JOIN users u ON s.assigned_to = u.id
+    WHERE u.role = 'employee'
+");
+$taskStatusSummaries = $taskStatusSummaryStmt->fetchAll();
 ?>
 
 <?php include '../includes/header.php'; ?>
@@ -55,9 +71,9 @@ $users = $usersStmt->fetchAll();
             <label for="priority">Priority</label>
             <select name="priority" id="priority">
                 <option value="">All</option>
-                <option value="low" <?= isset($_POST['priority']) && $_POST['priority'] === 'low' ? 'selected' : '' ?>>Low</option>
-                <option value="medium" <?= isset($_POST['priority']) && $_POST['priority'] === 'medium' ? 'selected' : '' ?>>Medium</option>
-                <option value="high" <?= isset($_POST['priority']) && $_POST['priority'] === 'high' ? 'selected' : '' ?>>High</option>
+                <option value="Low" <?= isset($_POST['priority']) && $_POST['priority'] === 'Low' ? 'selected' : '' ?>>Low</option>
+                <option value="Medium" <?= isset($_POST['priority']) && $_POST['priority'] === 'Medium' ? 'selected' : '' ?>>Medium</option>
+                <option value="High" <?= isset($_POST['priority']) && $_POST['priority'] === 'Hgh' ? 'selected' : '' ?>>High</option>
             </select>
         </div>
 
@@ -80,14 +96,15 @@ $users = $usersStmt->fetchAll();
     </form>
 
     <!-- Task List -->
+    <h3>All Tasks</h3>
     <table>
         <thead>
             <tr>
                 <th>Title</th>
-                <th>Description</th>
-                <th>Assigned To</th>
                 <th>Priority</th>
+                <th>Status</th>
                 <th>Deadline</th>
+                <th>Assigned To</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -95,23 +112,47 @@ $users = $usersStmt->fetchAll();
             <?php foreach ($tasks as $task): ?>
                 <tr>
                     <td><?= htmlspecialchars($task['title']) ?></td>
-                    <td><?= htmlspecialchars($task['description']) ?></td>
-                    <td><?= htmlspecialchars($task['assigned_to_name']) ?></td>
                     <td><?= htmlspecialchars($task['priority']) ?></td>
+                    <td><?= htmlspecialchars($task['status']) ?></td>
                     <td><?= htmlspecialchars($task['deadline']) ?></td>
+                    <td><?= htmlspecialchars($task['assigned_to_name']) ?></td>
                     <td>
-                        <a href="edit_task.php?id=<?= $task['id'] ?>">Edit</a> | 
-                        <a href="delete_task.php?id=<?= $task['id'] ?>" onclick="return confirm('Are you sure you want to delete this task?');">Delete</a>
+                        <a href="edit_task.php?id=<?= $task['task_id'] ?>">Edit</a> | 
+                        <a href="delete_task.php?id=<?= $task['task_id'] ?>" onclick="return confirm('Are you sure you want to delete this task?');">Delete</a>
                     </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
-
     <!-- Generate Report Button -->
     <form method="POST" action="reports.php">
-        <button type="submit" class="report-button">Generate Report</button>
-    </form>
+                <button type="submit" class="report-button">Generate Report</button>
+            </form>
+
+    <!-- Task Status Summary -->
+    <h3>Task Status Summary</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Total Tasks</th>
+                <th>Not Started</th>
+                <th>In Progress</th>
+                <th>Completed</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($taskStatusSummaries as $summary): ?>
+                <tr>
+                    <td><?= htmlspecialchars($summary['username']) ?></td>
+                    <td><?= htmlspecialchars($summary['total_tasks']) ?></td>
+                    <td><?= htmlspecialchars($summary['not_started']) ?></td>
+                    <td><?= htmlspecialchars($summary['in_progress']) ?></td>
+                    <td><?= htmlspecialchars($summary['completed']) ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
 </div>
 
 <?php include '../includes/footer.php'; ?>

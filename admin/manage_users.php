@@ -15,16 +15,34 @@ $stmt = $pdo->prepare("SELECT id, username, role FROM users WHERE role != 'admin
 $stmt->execute();
 $users = $stmt->fetchAll();
 
+$user_id = $_SESSION['user_id']; // Get the logged-in user ID
+$pdo->exec("SET myapp.current_user_id = '$user_id'");
+
 // Handle the POST request to update user roles
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['user_id'], $_POST['role'])) {
     $user_id = (int)$_POST['user_id'];
-    $role = $_POST['role'];
+    $new_role = $_POST['role'];
 
     // Ensure only valid roles can be set
-    if (in_array($role, ['manager', 'employee'])) {
-        $updateStmt = $pdo->prepare("UPDATE users SET role = ? WHERE id = ? AND role != 'admin'");
-        $updateStmt->execute([$role, $user_id]);
-        $success = "User role updated successfully.";
+    if (in_array($new_role, ['manager', 'employee'])) {
+        // Fetch the old role for logging
+        $roleStmt = $pdo->prepare("SELECT role, username FROM users WHERE id = ? AND role != 'admin'");
+        $roleStmt->execute([$user_id]);
+        $user = $roleStmt->fetch();
+
+        if ($user) {
+            $old_role = $user['role'];
+            $username = $user['username'];
+
+            // Update the user's role
+            $updateStmt = $pdo->prepare("UPDATE users SET role = ? WHERE id = ? AND role != 'admin'");
+            $updateStmt->execute([$new_role, $user_id]);
+
+           
+            $success = "User role updated successfully.";
+        } else {
+            $error = "User not found.";
+        }
     } else {
         $error = "Invalid role selected.";
     }

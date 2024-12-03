@@ -6,7 +6,12 @@ include '../includes/auth.php';
 // Ensure the user has admin role
 requireRole('admin');
 
-// Fetch tasks with the applied filters
+// Fetch task status summary from the `task_status_summary` view
+$statusSummaryStmt = $pdo->prepare("SELECT assigned_to, total_tasks, not_started, in_progress, completed FROM task_status_summary");
+$statusSummaryStmt->execute();
+$statusSummary = $statusSummaryStmt->fetchAll();
+
+// Fetch tasks with applied filters
 $whereClauses = [];
 $params = [];
 
@@ -42,6 +47,7 @@ if (!empty($tasks)) {
     $filename = "tasks_report_" . date("Y-m-d") . ".csv";
     header("Content-Type: text/csv");
     header("Content-Disposition: attachment; filename=\"$filename\"");
+
     $output = fopen("php://output", "w");
 
     // Write CSV column headers
@@ -49,12 +55,34 @@ if (!empty($tasks)) {
 
     // Write task data to CSV
     foreach ($tasks as $task) {
+        // Format the deadline date properly
+        if (empty($task['deadline'])) {
+            $deadline = 'No Deadline';  // Placeholder for empty deadlines
+        } else {
+            $deadline = date("Y-m-d", strtotime($task['deadline']));  // Format to Y-m-d (YYYY-MM-DD)
+        }
+        
+        // Write row to CSV
         fputcsv($output, [
             $task['title'],
             $task['description'],
             $task['assigned_to_name'],
             $task['priority'],
-            $task['deadline']
+            $deadline
+        ]);
+    }
+
+    // Write status summary to CSV
+    fputcsv($output, []); // Add a blank row for separation
+    fputcsv($output, ['Task Status Summary']); // Add a summary header row
+    fputcsv($output, ['Assigned To', 'Total Tasks', 'Not Started', 'In Progress', 'Completed']); // Add summary column headers
+    foreach ($statusSummary as $summary) {
+        fputcsv($output, [
+            $summary['assigned_to'],
+            $summary['total_tasks'],
+            $summary['not_started'],
+            $summary['in_progress'],
+            $summary['completed']
         ]);
     }
 
@@ -65,40 +93,3 @@ if (!empty($tasks)) {
     exit;
 }
 ?>
-
-<?php include '../includes/header.php'; ?>
-
-<!-- Admin Panel - Report Generation Section -->
-<div class="admin-panel">
-    <h2>Generate Task Report</h2>
-    <form method="POST">
-        <label for="priority">Priority</label>
-        <select name="priority" id="priority">
-            <option value="">--Select Priority--</option>
-            <option value="high">High</option>
-            <option value="medium">Medium</option>
-            <option value="low">Low</option>
-        </select>
-
-        <label for="assigned_to">Assigned To</label>
-        <select name="assigned_to" id="assigned_to">
-            <option value="">--Select User--</option>
-            <!-- Fetch and display users dynamically for selection -->
-            <?php
-            $userStmt = $pdo->prepare("SELECT id, username FROM users WHERE role != 'admin'");
-            $userStmt->execute();
-            $users = $userStmt->fetchAll();
-            foreach ($users as $user) {
-                echo "<option value='{$user['id']}'>{$user['username']}</option>";
-            }
-            ?>
-        </select>
-
-        <label for="deadline">Deadline</label>
-        <input type="date" name="deadline" id="deadline">
-
-        <button type="submit">Generate Report</button>
-    </form>
-</div>
-
-<?php include '../includes/footer.php'; ?>
