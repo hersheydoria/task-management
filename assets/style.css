@@ -100,7 +100,7 @@ footer {
 }
 
 .dashboard h2 {
-    color: #4CAF50;
+    color: #7A1CAC;
 }
 
 .dashboard-content ul {
@@ -113,7 +113,7 @@ footer {
 }
 
 .dashboard-content a {
-    color: #4CAF50;
+    color: #AD49E1;
     text-decoration: none;
     font-weight: bold;
 }
@@ -126,7 +126,7 @@ footer {
 .form-container {
     max-width: 400px;
     width: 90%;
-    margin: 0 auto;
+    margin: 50px auto 0; /* Add top margin for spacing and center horizontally */
     padding: 30px;
     background-color: #fff;
     border-radius: 5px;
@@ -135,9 +135,11 @@ footer {
     box-sizing: border-box;
 }
 
+
 .form-container h2 {
     text-align: center;
     margin-bottom: 30px;
+    color: #7A1CAC;
 }
 
 .form-group {
@@ -145,6 +147,7 @@ footer {
 }
 
 .form-group label {
+    color: #AD49E1;
     display: block;
     font-weight: bold;
 }
