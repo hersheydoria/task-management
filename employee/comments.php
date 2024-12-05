@@ -50,7 +50,7 @@ $comments = $commentsStmt->fetchAll();
 <?php include '../includes/header.php'; ?>
 
 <div class="comments">
-    <h2>Comments for Task: <?= htmlspecialchars($task['title']) ?></h2>
+    <h2>COMMENTS FOR TASK: <?= htmlspecialchars($task['title']) ?></h2>
 
     <!-- Comment Form -->
     <form method="POST">
@@ -59,7 +59,7 @@ $comments = $commentsStmt->fetchAll();
     </form>
 
     <!-- Display Comments -->
-    <h3>Existing Comments</h3>
+    <h3>EXISTING COMMENTS:</h3>
     <ul>
         <?php foreach ($comments as $comment): ?>
             <li>

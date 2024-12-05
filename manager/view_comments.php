@@ -24,8 +24,6 @@ if (!$task) {
     exit;
 }
 
-
-
 // Fetch comments associated with the task
 $commentsStmt = $pdo->prepare("SELECT c.comment, c.created_at, u.username 
                                FROM comments c 

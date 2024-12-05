@@ -18,7 +18,7 @@ $tasks = $stmt->fetchAll();
 <?php include '../includes/header.php'; ?>
 <div class="main-content">
     <div class="tasks">
-        <h2>All Tasks</h2>
+        <h2>ALL TASKS</h2>
         <table>
             <thead>
                 <tr>
