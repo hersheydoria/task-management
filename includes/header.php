@@ -12,11 +12,11 @@ if (session_status() === PHP_SESSION_NONE) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/style.css?v=1.0">
 <link rel="stylesheet" href="../assets/style.css?v=1.0">
-    <title>Task Management System</title>
+    <title>ManageMate</title>
 </head>
 <body>
 <header>
-    <h1>Task Management System</h1>
+    <h1>ManageMate</h1>
     <?php if (isset($_SESSION['user_id'])): ?>
         <nav>
         <a href="/task_management/dashboard.php">Dashboard</a>
