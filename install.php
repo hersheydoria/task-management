@@ -3,7 +3,7 @@
 $host = 'localhost';
 $db = 'task_management';
 $user = 'postgres';
-$pass = 'hershey';
+$pass = 'rovzkie';
 
 try {
     $pdo = new PDO("pgsql:host=$host;dbname=$db", $user, $pass);
@@ -59,3 +59,24 @@ try {
     die("Database setup failed: " . $e->getMessage());
 }
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Management System - Install</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+</head>
+<body>
+    <div class="main-content">
+        <h2>Installation Successful</h2>
+        <p>Database has been successfully set up, and the admin user has been created.</p>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <p>&copy; <?= date("Y") ?> Task Management System. All rights reserved.</p>
+    </footer>
+</body>
+</html>

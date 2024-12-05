@@ -2,7 +2,7 @@
 $host = 'localhost';
 $dbname = 'task_management';
 $username = 'postgres';
-$password = 'hershey';
+$password = 'rovzkie';
 
 try {
     // Use the PostgreSQL DSN instead of MySQL
