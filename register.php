@@ -32,17 +32,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <?php include 'includes/header.php'; ?>
 <div class="main-content">
-    <div class="form-container">
-        <h2>Register</h2>
-        <?php if (isset($error)) echo "<p class='error'>$error</p>"; ?>
-        <?php if (isset($success)) echo "<p class='success'>$success</p>"; ?>
-        <form method="POST">
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <input type="password" name="confirm_password" placeholder="Confirm Password" required>
-            <button type="submit">Register</button>
-        </form>
-        <p>Already have an account? <a href="index.php">Log in</a></p>
+    <div class="content-wrapper">
+        <div class="welcome-message">
+                <img src="huhuhu.gif" alt="Business GIF" class="welcome-image">
+                <h3>Welcome to ManageMate, the starting line of your productivity journey! 
+                Together, we’ll turn challenges into opportunities and goals into achievements. 
+                Let's get to it!</h3>
+            </div>
+        <div class="form-container">
+            <h2>Register</h2>
+            <?php if (isset($error)) echo "<p class='error'>$error</p>"; ?>
+            <?php if (isset($success)) echo "<p class='success'>$success</p>"; ?>
+            <form method="POST">
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+                <button type="submit">Register</button>
+            </form>
+            <p>Already have an account? <a href="index.php">Log in</a></p>
+        </div>
     </div>
 </div>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
 <?php include 'includes/footer.php'; ?>
