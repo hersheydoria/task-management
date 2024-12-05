@@ -33,6 +33,7 @@ $username = $user['username'];
 <?php include 'includes/header.php'; ?>
 <div class="main-content">
     <div class="dashboard">
+         <img src="hihoo.gif" alt="Business GIF" class="grettings-image">
         <h2>Welcome, <?= htmlspecialchars($username) ?>!</h2>
         <p>Your role: <strong><?= ucfirst($role) ?></strong></p>
         <div class="dashboard-content">
@@ -59,4 +60,8 @@ $username = $user['username'];
         </div>
     </div>
 </div>
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
 <?php include 'includes/footer.php'; ?>

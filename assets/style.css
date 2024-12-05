@@ -48,6 +48,14 @@ html, body {
     max-width: 100%; /* Ensure the GIF does not exceed the container width */
 }
 
+.grettings-image {
+    display: block;
+    margin: 0 auto 20px;
+    height: 100px; /* Adjust the height to a medium size */
+    width: auto; /* Maintain the aspect ratio */
+    max-width: 100%; /* Ensure the GIF does not exceed the container width */
+}
+
 
 /* Ensure the footer stays at the bottom */
 footer {
@@ -81,8 +89,11 @@ header {
 header h1 {
     margin: 0;
     font-size: 24px;
-    color: white;
+    color: #EBD3F8;
+    font-family: 'Montserrat', sans-serif;
 }
+
+
 
 /* Styling for the navigation */
 header nav {
@@ -92,7 +103,7 @@ header nav {
 
 header nav a {
     text-decoration: none;
-    color: #fff;
+    color: #2E073F;
     font-size: 16px;
     padding: 5px 10px;
     border-radius: 5px;
@@ -100,8 +111,7 @@ header nav a {
 }
 
 header nav a:hover {
-    background-color: black;
-    color: white;
+    color: #EBD3F8;
 }
 
 form {
@@ -144,19 +154,38 @@ footer {
     margin-bottom: 0;
 }
 
+
 .dashboard {
     text-align: center;
-    margin: 20px auto;
-    max-width: 800px;
-    background: #fff;
+    margin: 20px auto; /* Center the dashboard horizontally with a margin */
+    width: 100%; /* Make the width 100% so it can adjust responsively */
+    max-width: 800px; /* Limit the maximum width */
     padding: 20px;
-    border: 1px solid #ddd;
     border-radius: 5px;
+    box-sizing: border-box; /* Ensure padding is included in the width calculation */
 }
 
+
 .dashboard h2 {
-    color: #7A1CAC;
+    color: #AD49E1;
+    font-size: 3rem; /* Adjust the size as needed */
+    font-family: 'Roboto Slab', serif; /* Interesting font style */
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3); /* Adding shadow */
 }
+
+.dashboard p{
+    color: #EBD3F8;
+    font-size: medium;
+}
+
+.dashboard h3 {
+    color: #EBD3F8;
+    font-size: larger;
+    font-family: 'Pacifico', cursive; /* Interesting font style */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Adding shadow */
+}
+
+
 
 .dashboard-content ul {
     list-style: none;
@@ -166,6 +195,11 @@ footer {
 .dashboard-content li {
     margin: 10px 0;
 }
+
+.dashboard-content li a{
+    color: #7A1CAC;
+}
+
 
 .dashboard-content a {
     color: #AD49E1;
