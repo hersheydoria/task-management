@@ -434,3 +434,19 @@ table td a:hover{
     max-width: 300px;
 }
 
+/*diri ko nag start*/
+/*header*/
+header h1 {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between logo and text */
+    font-size: 1.8rem; /* Adjust text size as needed */
+    margin: 0;
+    height: 30px;
+}
+
+.logo {
+    width: 70px; /* Adjust logo size */
+    height: auto; /* Maintain aspect ratio */
+}
+
