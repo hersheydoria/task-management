@@ -7,7 +7,7 @@ include '../includes/auth.php';
 requireRole('admin');
 
 // Fetch task status summary from the `task_status_summary` view
-$statusSummaryStmt = $pdo->prepare("SELECT assigned_to, total_tasks, not_started, in_progress, completed FROM task_status_summary");
+$statusSummaryStmt = $pdo->prepare("SELECT * FROM task_status_summary");
 $statusSummaryStmt->execute();
 $statusSummary = $statusSummaryStmt->fetchAll();
 
@@ -78,7 +78,7 @@ if (!empty($tasks)) {
     fputcsv($output, ['Assigned To', 'Total Tasks', 'Not Started', 'In Progress', 'Completed']); // Add summary column headers
     foreach ($statusSummary as $summary) {
         fputcsv($output, [
-            $summary['assigned_to'],
+            $summary['username'],
             $summary['total_tasks'],
             $summary['not_started'],
             $summary['in_progress'],
