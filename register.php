@@ -21,9 +21,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             $stmt = $pdo->prepare("INSERT INTO users (username, password, role) VALUES (?, ?, ?)");
             if ($stmt->execute([$username, $hashed_password, $role])) {
-                // Log the registration action
-                $newUserId = $pdo->lastInsertId(); // Get the ID of the newly created user
-                logAction($pdo, $newUserId, 'CREATE', 'users', null, "User '$username' registered.");
 
                 $success = "Registration successful! You can now log in.";
             } else {
