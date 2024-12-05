@@ -180,7 +180,7 @@ footer {
 
 
 .dashboard h2 {
-    color: #AD49E1;
+    color: white;
     font-size: 3rem; /* Adjust the size as needed */
     font-family: 'Roboto Slab', serif; /* Interesting font style */
     text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3); /* Adding shadow */
@@ -193,10 +193,12 @@ footer {
 
 .dashboard h3 {
     color: #EBD3F8;
-    font-size: larger;
-    font-family: 'Pacifico', cursive; /* Interesting font style */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Adding shadow */
+    font-size: 1.5rem;
+    font-family: 'Lato', sans-serif; /* Changed to Lato */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Keeping the shadow */
 }
+
+
 
 
 
@@ -210,7 +212,7 @@ footer {
 }
 
 .dashboard-content li a{
-    color: #7A1CAC;
+    color: white;
 }
 
 
