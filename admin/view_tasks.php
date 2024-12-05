@@ -58,16 +58,16 @@ $taskStatusSummaries = $taskStatusSummaryStmt->fetchAll();
 
 <?php include '../includes/header.php'; ?>
 
-<div class="admin-panel">
-    <h2>View All Tasks</h2>
+<div class="admin-panel" style="font-family: 'Dancing Script', cursive;">
+    <h2> <i class="fas fa-tasks"></i> View All Tasks</h2>
     
     <!-- Filter Form -->
     <form method="POST">
         <div class="form-group">
             <label for="priority">Priority</label>
             <select name="priority" id="priority">
-                <option value="">All</option>
-                <option value="Low" <?= isset($_POST['priority']) && $_POST['priority'] === 'Low' ? 'selected' : '' ?>>Low</option>
+                <option value="" >All</option>
+                <option value="Low" <?= isset($_POST['priority']) && $_POST['priority'] === 'Low' ? 'selected' : '' ?> >Low</option>
                 <option value="Medium" <?= isset($_POST['priority']) && $_POST['priority'] === 'Medium' ? 'selected' : '' ?>>Medium</option>
                 <option value="High" <?= isset($_POST['priority']) && $_POST['priority'] === 'Hgh' ? 'selected' : '' ?>>High</option>
             </select>
@@ -152,3 +152,4 @@ $taskStatusSummaries = $taskStatusSummaryStmt->fetchAll();
 </div>
 
 <?php include '../includes/footer.php'; ?>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">

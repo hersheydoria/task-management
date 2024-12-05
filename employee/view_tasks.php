@@ -137,5 +137,5 @@ $noHighPriorityMessage = empty($highPriorityTasks) ? "No high-priority tasks fou
         </table>
     <?php endif; ?>
 </div>
-
+ 
 <?php include '../includes/footer.php'; ?>

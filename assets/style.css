@@ -291,9 +291,11 @@ footer {
 }
 
 .form-group label {
-    color: #AD49E1;
+    color: #2e073f;
     display: block;
     font-weight: bold;
+    font-family: 'Dancing Script', cursive;
+    font-size: 18px;
 }
 
 .form-group input,
@@ -301,7 +303,7 @@ footer {
 .form-group select {
     width: 100%;
     padding: 10px;
-    margin-top: 5px;
+    margin-top: 3px;
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 14px;
@@ -309,6 +311,7 @@ footer {
 
 .form-group textarea {
     resize: vertical;
+    font-family: 'Dancing Script', cursive;
 }
 
 button {
@@ -321,6 +324,7 @@ button {
     cursor: pointer;
     border-radius: 5px;
     width: 100%;
+    font-family: 'Dancing Script', cursive;
 }
 
 button:hover {
@@ -380,12 +384,12 @@ table th {
 }
 
 .report-button {
-    background-color: #AD49E1;
+    background-color: #2e073f;
     color: white;
 }
 
 .report-button:hover {
-    background-color: #AD49E1;
+    background-color: #7A1CAC;
 }
 
 table tr{
@@ -450,3 +454,367 @@ header h1 {
     height: auto; /* Maintain aspect ratio */
 }
 
+/* Styling for the overall container */
+.container {
+    margin: 10 auto;
+    padding: 20px;
+    background-color: #EBD3F8;
+    border-radius: 10px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Lato', sans-serif;
+}
+
+.container h2 {
+    font-size: 0.9rem; /* Smaller font size */
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+
+/* Styling for the greetings image */
+.greetings-image {
+    margin-top:-10px;
+    display: block;
+    max-width: 12%;
+    height: auto;
+    margin: auto;
+}
+
+/* Container for each panel (admin, manager, employee) */
+.panel-container {
+    margin-bottom: 5px;
+}
+
+/* Styling for the Admin panel specifically */
+
+.admin-panel {
+    background-color: #EBD3F8;
+    border: 1px solid #ddd;
+    max-width: 500px; /* Limits the size */
+    margin: 0 auto; /* Centers the panel */
+    padding: 10px; /* Adjust padding */
+}
+
+
+.admin-header {
+    font-size: 0.8rem; /* Larger font for Admin */
+    color: #2e073f; /* Dark purple for Admin */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+
+/* Styling for the Manager panel specifically */
+.manager-panel {
+    padding: 15px;
+    background-color: #EBD3F8;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.manager-header {
+    font-size: 1.8rem; /* Larger font for Manager */
+    color: #8e7cc3; /* Light purple for Manager */
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+
+/* Styling for the Employee panel specifically */
+.employee-panel {
+    padding: 15px;
+    background-color: #EBD3F8;
+    border: 1px solid #EBD3F8;
+    border-radius: 8px;
+}
+
+.employee-header {
+    font-size: 1.8rem; /* Larger font for Employee */
+    color: #28a745; /* Green for Employee */
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+
+/*button and icon*/
+/* Style for the list containing buttons */
+.panel ul {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping to the next row */
+    gap: 15px; /* Spacing between buttons */
+    padding: 0;
+    list-style: none;
+    margin: 0;
+}
+
+/* Style for list items */
+.panel li {
+    flex: 1 1 calc(50% - 15px); /* Two items per row, accounting for gap */
+    display: flex;
+    justify-content: center; /* Center align the button */
+}
+
+/* Grid layout for buttons */
+.button-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 buttons per row */
+    gap: 20px; /* Space between buttons */
+
+    list-style: none; /* Remove bullets */
+    margin: 20px 0;
+}
+
+/* Uniform button style */
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2e073f; /* Button background color */
+    color: #fff; /* Text color */
+    text-decoration: none;
+    padding: 1px 15px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 150px; /* Set exact width */
+    height: 40px; /* Set exact height */
+    text-align: center;
+}
+
+/* Button hover effect */
+.button:hover {
+    background-color: #7A1CAC;
+    transform: scale(1.05);
+}
+
+/* Icon spacing and size */
+.button i {
+    margin-right: 10px; /* Space between icon and text */
+    font-size: 0.9rem;
+}
+
+/* Ensure uniformity for all list items */
+.button-grid li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*footer*/
+/* Ensure body takes full height of the viewport */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+/* Use Flexbox for the body to push footer down */
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Ensure the content area (main) takes up available space */
+.admin-panel {
+    flex: 1;
+}
+
+/* Footer styling */
+footer {
+    background-color: #7A1CAC;
+    padding: 10px;
+    text-align: center;
+    margin-top: auto;
+    width: 100%;
+}
+
+select, option {
+    font-family: 'Dancing Script', cursive;
+    font-size: 14px; /* Adjust size if necessary */
+    color: #333; /* Text color */
+    background-color: #f9f9f9; /* Background color for the dropdown */
+    border: 1px solid #ddd; /* Border style */
+    border-radius: 4px; /* Rounded corners */
+    padding: 5px; /* Space inside the dropdown */
+}
+/* General Admin Panel Styling */
+.view-logs-admin-panel {
+    font-family: 'Dancing Script', cursive;
+    width: 80%; /* Adjusted width */
+    max-width: 1000px; /* Maximum width */
+    margin: 20px auto;
+    background-color: #ebd3f8;
+    border: 4px solid #AD49E1; /* Increased border size of the admin panel */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+/* Fixed Header Styling */
+.view-logs-admin-panel-header {
+    background-color: #ebd3f8;
+    color: #2e073f;
+    text-align: center;
+    padding: 15px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    border-bottom: 3px solid #7A1CAC; /* Increased border size for the header */
+}
+
+/* Scrollable Table Container */
+.view-logs-table-container {
+    max-height: 400px; /* Set fixed max-height for the table container */
+    overflow-y: scroll;  /* Enable vertical scrolling */
+    overflow-x: auto;  /* Enable horizontal scrolling if needed */
+    padding: 10px;
+}
+
+/* Table Styling */
+.view-logs-styled-table {
+    width: 100%;
+    font-size: 13px;
+    background-color: #ebd3f8;
+    border-collapse: collapse; /* Ensures borders collapse between cells */
+    table-layout: fixed; /* Fix the table layout, which helps in handling long text */
+}
+
+/* Table header */
+.view-logs-styled-table th {
+    background-color: #2e073f;
+    color: white;
+    text-align: center; /* Centers the header text */
+    padding: 12px;
+    border: 3px solid #AD49E1; /* Border size for header */
+}
+
+/* Table rows */
+.view-logs-styled-table td {
+    text-align: center; /* Centers the content of each cell */
+    padding: 12px;
+    color: #2e073f; /* Default text color for all table data */
+    border: 3px solid #AD49E1; /* Border size for table data cells */
+    word-wrap: break-word; /* Ensures that long text is wrapped in cells */
+}
+
+/* Text color for specific columns */
+.view-logs-styled-table td.username {
+    color: #2e073f; /* Username text color */
+}
+
+.view-logs-styled-table td.action {
+    color: #7A1CAC; /* Action text color */
+}
+
+.view-logs-styled-table td.timestamp {
+    color: #AD49E1; /* Timestamp text color */
+}
+
+.view-logs-styled-table td.details {
+    color: #333; /* Details text color */
+}
+
+/* Alternating Row Background Colors */
+.view-logs-styled-table tr:nth-child(even) {
+    background-color: #7A1CAC;
+}
+
+.view-logs-styled-table tr:nth-child(odd) {
+    background-color: #ebd3f8;
+}
+
+/* Alternating Row Text Colors */
+.view-logs-styled-table tr:nth-child(even) td {
+    color: white;
+}
+
+.view-logs-styled-table tr:nth-child(odd) td {
+    color: #2E073F;
+}
+
+/* Hover Effect */
+.view-logs-styled-table tr:hover {
+    background-color: #AD49E1;
+}
+
+/* Specific Style for User Task Activity Summary */
+.user-task-summary-admin-panel {
+    font-family: 'Dancing Script', cursive;
+    width: 80%; /* Adjusted width */
+    max-width: 1000px; /* Maximum width */
+    margin: 20px auto;
+    background-color: #ebd3f8; /* Lighter background color */
+    border: 3px solid #AD49E1; /* Purple border */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+/* Fixed Header Styling for User Task Activity Summary */
+.user-task-summary-admin-panel-header {
+    background-color: #ebd3f8;
+    color: #2e073f;
+    text-align: center;
+    padding: 15px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    border-bottom: 3px solid #AD49E1; /* Border size for header */
+}
+
+/* Scrollable Table Container */
+.user-task-summary-table-container {
+    max-height: 400px; /* Set fixed max-height for the table container */
+    overflow-y: scroll;  /* Enable vertical scrolling */
+    overflow-x: auto;  /* Enable horizontal scrolling if needed */
+    padding: 10px;
+}
+
+/* Table Styling for User Task Summary */
+.user-task-summary-styled-table {
+    width: 100%;
+    font-size: 13px;
+    background-color: #f0e6f7; /* Lighter background */
+    border-collapse: collapse; /* Ensures borders collapse between cells */
+    table-layout: fixed; /* Fix the table layout */
+}
+
+/* Table header */
+.user-task-summary-styled-table th {
+    background-color: #2e073f;
+    color: white;
+    text-align: center;
+    padding: 12px;
+    border: 3px solid #AD49E1; /* Border size for header */
+}
+
+/* Table rows */
+.user-task-summary-styled-table td {
+    text-align: center;
+    padding: 12px;
+    color: #2e073f; /* Default text color */
+    border: 3px solid #AD49E1; /* Border size for table data cells */
+    word-wrap: break-word; /* Ensures long text wraps inside cells */
+}
+
+/* Alternating Row Background Colors */
+.user-task-summary-styled-table tr:nth-child(even) {
+    background-color: #7A1CAC;
+}
+
+.user-task-summary-styled-table tr:nth-child(odd) {
+    background-color: #ebd3f8;
+}
+
+/* Alternating Row Text Colors */
+.user-task-summary-styled-table tr:nth-child(even) td {
+    color: white;
+}
+
+.user-task-summary-styled-table tr:nth-child(odd) td {
+    color: #2e073F;
+}
+
+/* Hover Effect */
+.user-task-summary-styled-table tr:hover {
+    background-color: #AD49E1;
+}

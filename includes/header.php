@@ -18,7 +18,7 @@ if (session_status() === PHP_SESSION_NONE) {
 </head>
 <body>
 <header>
-    <h1><img src="admin\images\ManageMate-Photoroom.png" alt="ManageMate Logo" class="logo">
+    <h1><img src="admin/images/ManageMate-Photoroom.png" alt="ManageMate Logo" class="logo">
     ManageMate</h1>
     <?php if (isset($_SESSION['user_id'])): ?>
         <nav>
