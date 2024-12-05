@@ -72,5 +72,4 @@ $users = $stmt->fetchAll();
         <button type="submit">Create Task</button>
     </form>
 </div>
-
 <?php include '../includes/footer.php'; ?>

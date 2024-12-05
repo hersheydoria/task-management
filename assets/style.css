@@ -206,6 +206,10 @@ button:hover {
     margin-bottom: 30px;
 }
 
+.tasks h2 {
+    color: #7A1CAC;
+}
+
 form {
     margin-bottom: 30px;
 }
@@ -224,7 +228,7 @@ table td {
 }
 
 table th {
-    background-color: #4CAF50;
+    background-color: #7A1CAC;
     color: white;
 }
 
@@ -258,7 +262,7 @@ table th {
 }
 
 .admin-panel th {
-    background-color: #4CAF50;
+    background-color: #7A1CAC;
     color: #fff;
 }
 

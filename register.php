@@ -45,5 +45,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <p>Already have an account? <a href="index.php">Log in</a></p>
     </div>
 </div>
-
 <?php include 'includes/footer.php'; ?>
