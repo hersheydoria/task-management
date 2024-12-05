@@ -161,6 +161,45 @@ footer {
     margin-bottom: 30px;
     color: #7A1CAC;
 }
+ .form-container a:hover{
+    color: #AD49E1;
+ }
+
+ .comments a{
+    color: #AD49E1;
+ }
+
+ .comments a:hover{
+    color: #EBD3F8;
+ }
+
+ .comments h2{
+    color: #7A1CAC;
+ }
+
+ .comments p{
+    color: #ddd;
+ }
+
+ .comments {
+    flex-grow: 1;
+}
+
+.comments h3{
+    color: #AD49E1;
+}
+
+.comments strong{
+    color: #EBD3F8;
+}
+
+.tasks{
+    flex-grow: 1;
+}
+
+.form-container{
+    flex-grow: 1;
+}
 
 .form-group {
     margin-bottom: 15px;
@@ -253,12 +292,24 @@ table th {
 }
 
 .report-button {
-    background-color: #007bff;
+    background-color: #AD49E1;
     color: white;
 }
 
 .report-button:hover {
-    background-color: #0056b3;
+    background-color: #AD49E1;
+}
+
+table tr{
+    color: #ddd;
+}
+
+table td a{
+    color: #AD49E1;
+}
+
+table td a:hover{
+    color: #EBD3F8;
 }
 
 .admin-panel {
