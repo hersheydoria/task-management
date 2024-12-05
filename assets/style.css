@@ -32,21 +32,41 @@ body {
     min-height: 100vh; /* Full viewport height */
 }
 
-/* Your existing styles for header, forms, dashboard, etc. */
+/* General header styling */
 header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
     background-color: #2E073F;
-    color: #fff;
-    padding: 10px 20px;
+    border-bottom: 1px solid #ddd;
 }
 
+/* Styling for the header title */
 header h1 {
     margin: 0;
+    font-size: 24px;
+    color: white;
 }
 
-nav a {
-    color: #fff;
-    margin-right: 15px;
+/* Styling for the navigation */
+header nav {
+    display: flex;
+    gap: 15px; /* Space between navigation links */
+}
+
+header nav a {
     text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+header nav a:hover {
+    background-color: black;
+    color: white;
 }
 
 form {
