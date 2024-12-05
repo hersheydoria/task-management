@@ -28,10 +28,8 @@ if (isset($_POST['deadline']) && $_POST['deadline'] !== '') {
 
 // Fetch tasks
 $query = "
-    SELECT t.task_id, t.title, t.priority, t.status, t.deadline, u.username AS assigned_to_name
-    FROM all_user_task_summary(NULL) t
-    LEFT JOIN users u ON t.assigned_to = u.id
-    WHERE u.role = 'employee'  -- Ensure that the assigned user is an employee
+    SELECT *
+    FROM all_user_task_summary(NULL);
 ";
 
 if (!empty($whereClauses)) {
@@ -52,10 +50,8 @@ $users = $usersStmt->fetchAll();
 
 // Fetch task status summary for all users
 $taskStatusSummaryStmt = $pdo->query("
-    SELECT u.username, s.total_tasks, s.not_started, s.in_progress, s.completed
-    FROM task_status_summary s
-    JOIN users u ON s.assigned_to = u.id
-    WHERE u.role = 'employee'
+    SELECT *
+    FROM task_status_summary 
 ");
 $taskStatusSummaries = $taskStatusSummaryStmt->fetchAll();
 ?>
