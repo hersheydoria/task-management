@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 include '../includes/db.php';
 include '../includes/auth.php';
 
@@ -78,7 +79,7 @@ $noHighPriorityMessage = empty($highPriorityTasks) ? "No high-priority tasks fou
 </style>
 
 <div class="tasks">
-    <h2>Assigned Tasks</h2>
+    <h2 style="font-family: 'Roboto Slab', serif; color: white"> <i class="fas fa-user-check"></i> Assigned Tasks</h2>
 
     <?php if ($noTasksMessage): ?>
         <p><?= htmlspecialchars($noTasksMessage) ?></p>
@@ -112,7 +113,7 @@ $noHighPriorityMessage = empty($highPriorityTasks) ? "No high-priority tasks fou
 
     <div class="divider"></div>
 
-    <h2>High Priority Tasks</h2>
+    <h2 style="font-family: 'Roboto Slab', serif; color: white"> <i class="fas fa-exclamation-circle"></i> High Priority Tasks</h2>
 
     <?php if ($noHighPriorityMessage): ?>
         <p><?= htmlspecialchars($noHighPriorityMessage) ?></p>
@@ -139,3 +140,4 @@ $noHighPriorityMessage = empty($highPriorityTasks) ? "No high-priority tasks fou
 </div>
  
 <?php include '../includes/footer.php'; ?>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">

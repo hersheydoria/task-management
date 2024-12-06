@@ -1,5 +1,13 @@
 <?php
 session_start();
+
+// Check if the user is logged in
+if (isset($_SESSION['user_id'])) {
+    // Redirect to dashboard or homepage if already logged in
+    header('Location: dashboard.php');
+    exit();
+}
+
 include 'includes/db.php';
 include 'includes/auth.php'; // Include the logAction function
 
@@ -34,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div class="main-content">
     <div class="content-wrapper">
         <div class="welcome-message">
-                <img src="huhuhu.gif" alt="Business GIF" class="welcome-image">
+          <img src="/task_management/public/intro.png" alt="Task" class="welcome-image">
                 <h3>Welcome to ManageMate, the starting line of your productivity journey! 
                 Together, we’ll turn challenges into opportunities and goals into achievements. 
                 Let's get to it!</h3>
@@ -53,5 +61,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </div>
 </div>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
 <?php include 'includes/footer.php'; ?>

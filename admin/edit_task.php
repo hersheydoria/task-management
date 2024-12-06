@@ -47,8 +47,8 @@ $users = $usersStmt->fetchAll();
 
 <?php include '../includes/header.php'; ?>
 
-<div class="form-container">
-    <h2>Edit Task</h2>
+<div class="edit-container">
+<h2 style="color: white; font-family: 'Roboto Slab', serif;"><i class="fas fa-tasks"></i> Edit Tasks</h2>
 
     <form method="POST">
         <div class="form-group">
@@ -92,3 +92,4 @@ $users = $usersStmt->fetchAll();
 </div>
 
 <?php include '../includes/footer.php'; ?>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">

@@ -2,23 +2,20 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="assets/style.css?v=1.0">
-<link rel="stylesheet" href="../assets/style.css?v=1.0">
+    <link rel="stylesheet" href="../assets/style.css?v=1.0">
     <title>ManageMate</title>
 </head>
 <body>
 <header>
-    <h1><img src="admin/images/ManageMate-Photoroom.png" alt="ManageMate Logo" class="logo">
+    <h1><img src="/task_management/public/ManageMate-Photoroom.png" alt="ManageMate Logo" class="logo">
     ManageMate</h1>
     <?php if (isset($_SESSION['user_id'])): ?>
         <nav>

@@ -2,6 +2,7 @@
 html, body {
     height: 100%;
     margin: 0;
+    overflow-x: hidden;
 }
 
 /* The main content container should take at least the full height of the screen */
@@ -12,6 +13,7 @@ html, body {
     align-items: center; /* Center vertically */
     padding: 20px 0; /* Optional padding for better spacing */
     box-sizing: border-box;
+    overflow-y: hidden;
 }
 
 .content-wrapper {
@@ -28,8 +30,6 @@ html, body {
 .welcome-message {
     flex: 1;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     font-size: 1.2rem; /* Slightly larger text for more emphasis */
     font-family: 'Dancing Script', cursive; /* Cute and playful font */
     font-weight: normal; /* Normal weight for a relaxed look */
@@ -40,22 +40,47 @@ html, body {
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Light text shadow */
 }
 
+@keyframes wiggle {
+    0% {
+        transform: rotate(0deg) translateX(0);
+    }
+    25% {
+        transform: rotate(-5deg) translateX(-5px);
+    }
+    50% {
+        transform: rotate(5deg) translateX(5px);
+    }
+    75% {
+        transform: rotate(-5deg) translateX(-5px);
+    }
+    100% {
+        transform: rotate(0deg) translateX(0);
+    }
+}
+
 .welcome-image {
     display: block;
-    margin: 0 auto 20px;
-    height: 200px; /* Adjust the height to a medium size */
-    width: auto; /* Maintain the aspect ratio */
-    max-width: 100%; /* Ensure the GIF does not exceed the container width */
+    margin: 20px auto; /* Center the image */
+    width: 200px; /* Adjust size as needed */
+    height: 200px; /* Ensures the image stays circular */
+    animation: wiggle 1.5s ease-in-out infinite; /* Dancing wiggle animation */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Adds smooth hover animations */
 }
 
-.grettings-image {
+.greetings-image {
     display: block;
-    margin: 0 auto 20px;
-    height: 100px; /* Adjust the height to a medium size */
-    width: auto; /* Maintain the aspect ratio */
-    max-width: 100%; /* Ensure the GIF does not exceed the container width */
+    margin: 20px auto; /* Centers the image horizontally */
+    border-radius: 50%; /* Makes the image round */
+    width: 150px; /* Adjust size as needed */
+    height: 150px; /* Ensures the image stays circular */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds shadow around the image */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effect */
 }
 
+.greetings-image:hover {
+    transform: scale(1.1); /* Slightly enlarges the image on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Enhances shadow on hover */
+}
 
 /* Ensure the footer stays at the bottom */
 footer {
@@ -106,8 +131,6 @@ header h1 {
     font-family: 'Montserrat', sans-serif;
 }
 
-
-
 /* Styling for the navigation */
 header nav {
     display: flex;
@@ -116,7 +139,7 @@ header nav {
 
 header nav a {
     text-decoration: none;
-    color: #2E073F;
+    color: white;
     font-size: 16px;
     padding: 5px 10px;
     border-radius: 5px;
@@ -124,14 +147,13 @@ header nav a {
 }
 
 header nav a:hover {
-    color: #EBD3F8;
+    color: black;
 }
 
 form {
     max-width: 400px;
     margin: 20px auto;
     padding: 20px;
-    background: #EBD3F8;
     border: 1px solid #EBD3F8;
     border-radius: 5px;
 }
@@ -142,12 +164,6 @@ input, button {
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
-}
-
-button {
-    background: #4CAF50;
-    color: #fff;
-    border: none;
 }
 
 .error {
@@ -165,13 +181,89 @@ footer {
     background: #7A1CAC;
     color: white;
     margin-bottom: 0;
+    border-top: 1px solid #ddd;
 }
 
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+    .content-wrapper {
+        flex-direction: column; /* Stack items vertically */
+        gap: 15px; /* Adjust spacing */
+        width: 90%; /* Slightly narrower width */
+    }
+
+    .welcome-message {
+        font-size: 1rem; /* Reduce font size */
+        padding: 15px; /* Adjust padding */
+    }
+
+    .welcome-image {
+        width: 150px; /* Resize image */
+        height: 150px;
+    }
+
+    .greetings-image {
+        width: 120px; /* Resize image */
+        height: 120px;
+    }
+
+    header h1 {
+        font-size: 20px; /* Adjust header title size */
+    }
+
+    header nav a {
+        font-size: 14px; /* Smaller text for navigation links */
+        padding: 5px 5px; /* Adjust padding */
+    }
+
+    form {
+        width: 100%; /* Make form take full width */
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .content-wrapper {
+        gap: 10px; /* Reduce spacing further */
+        width: 100%; /* Full width */
+    }
+
+    .welcome-message {
+        font-size: 0.9rem; /* Smaller font for compact screens */
+    }
+
+    .welcome-image,
+    .greetings-image {
+        width: 100px; /* Reduce size further */
+        height: 100px;
+    }
+
+    header {
+        align-items: flex-start;
+    }
+
+    header h1 {
+        font-size: 18px; /* Adjust title size */
+    }
+
+    header nav {
+        flex-direction: column; /* Stack navigation links */
+        gap: 10px; /* Add space between links */
+    }
+
+    form {
+        padding: 10px; /* Compact padding */
+    }
+
+    input, button {
+        width: 90%; /* Take full width */
+    }
+}
 
 .dashboard {
     text-align: center;
     margin: 20px auto; /* Center the dashboard horizontally with a margin */
-    width: 100%; /* Make the width 100% so it can adjust responsively */
+    width: 100%;
     max-width: 800px; /* Limit the maximum width */
     padding: 20px;
     border-radius: 5px;
@@ -198,10 +290,6 @@ footer {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Keeping the shadow */
 }
 
-
-
-
-
 .dashboard-content ul {
     list-style: none;
     padding: 0;
@@ -226,6 +314,73 @@ footer {
     text-decoration: underline;
 }
 
+.edit-container {
+    max-width: 400px;  /* Adjust max-width */
+    width: 100%;        /* Allow for flexibility */
+    margin: 50px auto 0;  /* Centered with margin at the top */
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.9rem;
+    box-sizing: border-box;
+    border-radius: 8px; /* Smooth edges */
+    margin-left: 33%;
+}
+
+.edit-container h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;  /* More space below the title */
+    text-align: center;
+    color: white; /* Title color */
+    margin-left: 33%;
+}
+
+/* Style for input fields, selects, and text areas */
+.edit-container .form-group input,
+.edit-container .form-group textarea,
+.edit-container .form-group select {
+    align-items: center;
+    width: 400px;  /* Ensure all form elements take full width */
+    padding: 12px;  /* Add padding for better spacing */
+    margin-bottom: 15px;  /* Space between form elements */
+    border-radius: 4px;  /* Slight curve for input borders */
+    border: 1px solid #ddd; /* Subtle border */
+    box-sizing: border-box; /* Ensures padding and border are included in width calculation */
+}
+
+.edit-container button[type="submit"] {
+    width: 100%;  /* Make the button stretch */
+    padding: 12px;
+    background-color: #2E073F;
+    color: white;
+    border: none;
+    border-radius: 4px; /* Rounded edges */
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.edit-container button[type="submit"]:hover {
+    background-color: #7A1CAC;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 600px) {
+    .edit-container {
+        width: 95%;  /* Wider on small screens */
+        padding: 20px;  /* Reduced padding */
+    }
+
+    .edit-container h2 {
+        font-size: 1.5rem; /* Smaller font size for the title */
+    }
+
+    /* Adjust button size */
+    .edit-container button[type="submit"] {
+        font-size: 1.1rem;  /* Increase button text size */
+    }
+}
+
 /* Form styling */
 .form-container {
     max-width: 400px;
@@ -237,50 +392,105 @@ footer {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     text-align: center;
     box-sizing: border-box;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Adds smooth animations */
 }
 
+.form-container:hover {
+    transform: scale(1.1); /* Slightly enlarges the image on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Enhances shadow on hover */
+}
 
 .form-container h2 {
     text-align: center;
     margin-bottom: 30px;
     color: #7A1CAC;
 }
+
+.form-container p {
+    color:black;
+}
+
  .form-container a:hover{
     color: #AD49E1;
  }
 
- .comments a{
+/* Styling for the comments section */
+.comments {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Center the h2 and change its color to white */
+.comments h2 {
+    color: white;
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+/* Style for the comment input textarea */
+.comments form textarea {
+    width: 100%; /* Adjust width of the textarea */
+    max-width: 600px; /* Max width to avoid being too wide on large screens */
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+/* Style for the button */
+.comments form button {
+    background-color: #2E073F;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+.comments form button:hover {
+    background-color: #7A1CAC;
+}
+
+/* Center the comments list and adjust the list styling */
+.comments ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+    width: 80%; /* Center the list */
+    max-width: 600px; /* Max width */
+}
+
+.comments ul li {
+    background-color: #2E073F;
+    color: white;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.comments ul li strong {
     color: #AD49E1;
- }
+}
 
- .comments a:hover{
-    color: #EBD3F8;
- }
-
- .comments h2{
-    color: #7A1CAC;
- }
-
- .comments p{
+.comments ul li p {
     color: #ddd;
- }
-
- .comments {
-    flex-grow: 1;
+    font-size: 0.9rem;
 }
 
-.comments h3{
+.comments h3 {
     color: #AD49E1;
+    text-align: center;
+    margin-top: 20px;
 }
-
-.comments strong{
-    color: #EBD3F8;
-}
-
-.tasks{
-    flex-grow: 1;
-}
-
 
 .form-container{
     flex-grow: 1;
@@ -294,7 +504,6 @@ footer {
     color: #2e073f;
     display: block;
     font-weight: bold;
-    font-family: 'Dancing Script', cursive;
     font-size: 18px;
 }
 
@@ -311,7 +520,86 @@ footer {
 
 .form-group textarea {
     resize: vertical;
-    font-family: 'Dancing Script', cursive;
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+    .dashboard {
+        width: 95%; /* Adjust width for better fit */
+        padding: 15px; /* Reduce padding */
+    }
+
+    .dashboard h2 {
+        font-size: 2.5rem; /* Decrease font size */
+    }
+
+    .dashboard p, .dashboard h3 {
+        font-size: 1rem; /* Adjust text size */
+    }
+
+    .form-container {
+        width: 100%; /* Full width */
+        margin: 30px auto 0; /* Adjust margin for smaller spacing */
+        padding: 20px; /* Reduce padding */
+    }
+
+    .comments {
+        width: 85%; /* Make them stack */
+        margin-bottom: 20px; /* Add spacing between sections */
+    }
+
+    .comments h2, .comments h3, h3 {
+        font-size: 1.2rem; /* Smaller headers */
+    }
+
+    .form-group label {
+        font-size: 16px; /* Reduce label font size */
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        font-size: 13px; /* Adjust input text size */
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard {
+        width: 100%; /* Full width */
+        padding: 10px; /* Compact padding */
+    }
+
+    .dashboard h2 {
+        font-size: 2rem; /* Smaller headers for mobile */
+    }
+
+    .dashboard p, .dashboard h3 {
+        font-size: 0.9rem; /* Compact text size */
+    }
+
+    .form-container {
+        padding: 15px; /* Compact padding */
+        box-shadow: none; /* Remove shadow for simplicity on small screens */
+        transform: none; /* Disable hover effect */
+    }
+
+    .comments {
+        margin-bottom: 15px; /* Adjust spacing */
+    }
+
+    .comments h2, .comments h3{
+        font-size: 1rem; /* Compact header size */
+    }
+
+    .form-group label {
+        font-size: 14px; /* Further reduce label size */
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        font-size: 12px; /* Smaller input text size */
+    }
 }
 
 button {
@@ -324,7 +612,6 @@ button {
     cursor: pointer;
     border-radius: 5px;
     width: 100%;
-    font-family: 'Dancing Script', cursive;
 }
 
 button:hover {
@@ -343,7 +630,6 @@ button:hover {
 .admin-panel {
     max-width: 1000px;
     margin: 30px auto;
-    background-color: #fff;
     padding: 30px;
     border-radius: 5px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -352,10 +638,6 @@ button:hover {
 .admin-panel h2 {
     text-align: center;
     margin-bottom: 30px;
-}
-
-.tasks h2 {
-    color: white;
 }
 
 p{
@@ -401,16 +683,7 @@ table td a{
 }
 
 table td a:hover{
-    color: #EBD3F8;
-}
-
-.admin-panel {
-    padding: 20px;
-    max-width: 900px;
-    margin: 20px auto;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    color: #2e073f;
 }
 
 .admin-panel table {
@@ -436,9 +709,133 @@ table td a:hover{
 .admin-panel td {
     word-wrap: break-word;
     max-width: 300px;
+    color: #2e073f; /* Default text color for all table data */
 }
 
-/*diri ko nag start*/
+/* Responsive styles for buttons and admin panel */
+@media (max-width: 768px) {
+    button {
+        font-size: 14px; /* Reduce font size for smaller screens */
+        padding: 10px 20px; /* Adjust padding */
+    }
+
+    .admin-panel {
+        padding: 15px; /* Reduce padding */
+        max-width: 95%; /* Reduce max width */
+        margin: 20px auto; /* Center with reduced margins */
+    }
+
+    .admin-panel table {
+        font-size: 14px; /* Adjust font size */
+    }
+
+    table th, table td {
+        padding: 8px; /* Reduce cell padding */
+    }
+
+    .report-button {
+        font-size: 14px; /* Smaller font size for buttons */
+        padding: 10px; /* Adjust padding */
+    }
+}
+
+@media (max-width: 480px) {
+    button {
+        font-size: 12px; /* Smaller font size for compact devices */
+        padding: 8px 16px; /* Compact padding */
+    }
+
+    .admin-panel {
+        padding: 10px; /* Compact padding for very small screens */
+        max-width: 100%; /* Full width */
+    }
+
+    .admin-panel table {
+        font-size: 12px; /* Compact font size for tables */
+    }
+
+    table th, table td {
+        padding: 6px; /* Compact cell padding */
+        font-size: 12px; /* Smaller text */
+    }
+
+    .report-button {
+        font-size: 12px; /* Compact button font size */
+        padding: 8px; /* Compact padding */
+    }
+
+    .admin-panel table td {
+        word-wrap: break-word;
+        max-width: 200px; /* Limit text wrapping for smaller screens */
+    }
+
+    p {
+        font-size: 14px; /* Smaller paragraph text */
+    }
+}
+
+/* Responsive styles for buttons and admin panel */
+@media (max-width: 768px) {
+    button {
+        font-size: 14px; /* Reduce font size for smaller screens */
+        padding: 10px 20px; /* Adjust padding */
+    }
+
+    .admin-panel {
+        padding: 15px; /* Reduce padding */
+        max-width: 95%; /* Reduce max width */
+        margin: 20px auto; /* Center with reduced margins */
+    }
+
+    .admin-panel table {
+        font-size: 14px; /* Adjust font size */
+    }
+
+    table th, table td {
+        padding: 8px; /* Reduce cell padding */
+    }
+
+    .report-button {
+        font-size: 14px; /* Smaller font size for buttons */
+        padding: 10px; /* Adjust padding */
+    }
+}
+
+@media (max-width: 480px) {
+    button {
+        font-size: 12px; /* Smaller font size for compact devices */
+        padding: 8px 16px; /* Compact padding */
+    }
+
+    .admin-panel {
+        padding: 10px; /* Compact padding for very small screens */
+        max-width: 100%; /* Full width */
+    }
+
+    .admin-panel table {
+        font-size: 12px; /* Compact font size for tables */
+    }
+
+    table th, table td {
+        padding: 6px; /* Compact cell padding */
+        font-size: 12px; /* Smaller text */
+    }
+
+    .report-button {
+        font-size: 12px; /* Compact button font size */
+        padding: 8px; /* Compact padding */
+    }
+
+    .admin-panel table td {
+        word-wrap: break-word;
+        max-width: 200px; /* Limit text wrapping for smaller screens */
+    }
+
+    p {
+        font-size: 14px; /* Smaller paragraph text */
+    }
+}
+
 /*header*/
 header h1 {
     display: flex;
@@ -456,28 +853,81 @@ header h1 {
 
 /* Styling for the overall container */
 .container {
-    margin: 10 auto;
-    padding: 20px;
-    background-color: #EBD3F8;
-    border-radius: 10px;
-    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
-    font-family: 'Lato', sans-serif;
+    max-width: 100%;
+    margin: 30px auto;
+    padding: 40px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.9rem;
 }
 
 .container h2 {
-    font-size: 0.9rem; /* Smaller font size */
-    text-align: center;
-    margin-bottom: 10px;
+    font-size: 2rem;
+    margin-top: -10px;
+    margin-bottom: 0px;
 }
 
+/* Table Container */
+.table-container {
+    margin-top: 10px;
+    max-width: 100%;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+}
 
-/* Styling for the greetings image */
-.greetings-image {
-    margin-top:-10px;
-    display: block;
-    max-width: 12%;
-    height: auto;
-    margin: auto;
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    background-color: #ebd3f8;
+    border: 2px solid #333;
+    max-height: 400px; /* Reduced table height */
+    overflow-y: auto; /* Add vertical scrolling */
+    display: block; /* Required for scrollable table */
+}
+
+.table-container table thead {
+    position: sticky;
+    top: 0;
+    background-color: #ebd3f8; /* Same as table background */
+}
+
+.table-container th,
+.table-container td {
+    padding: 1px 30px; /* Reduced padding for compact rows */
+    border: 2px solid #2e073f;
+    color: #2e073f;
+    text-align: center;
+    line-height: 1; /* Decreased line-height for reduced height */
+    height: 25px; /* Optional: Set a fixed height */
+}
+
+form button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #2e073f;
+    color: #ebd3f8;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #400850;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .table-container {
+        padding: 10px;
+    }
+
+    .table-container table {
+        font-size: 0.8rem;
+    }
 }
 
 /* Container for each panel (admin, manager, employee) */
@@ -486,7 +936,6 @@ header h1 {
 }
 
 /* Styling for the Admin panel specifically */
-
 .admin-panel {
     background-color: #EBD3F8;
     border: 1px solid #ddd;
@@ -495,10 +944,8 @@ header h1 {
     padding: 10px; /* Adjust padding */
 }
 
-
-.admin-header {
+.admin-header, .manager-header, .employee-header {
     font-size: 0.8rem; /* Larger font for Admin */
-    color: #2e073f; /* Dark purple for Admin */
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 15px;
@@ -512,13 +959,6 @@ header h1 {
     border-radius: 8px;
 }
 
-.manager-header {
-    font-size: 1.8rem; /* Larger font for Manager */
-    color: #8e7cc3; /* Light purple for Manager */
-    letter-spacing: 1px;
-    margin-bottom: 15px;
-}
-
 /* Styling for the Employee panel specifically */
 .employee-panel {
     padding: 15px;
@@ -527,14 +967,6 @@ header h1 {
     border-radius: 8px;
 }
 
-.employee-header {
-    font-size: 1.8rem; /* Larger font for Employee */
-    color: #28a745; /* Green for Employee */
-    letter-spacing: 1px;
-    margin-bottom: 15px;
-}
-
-/*button and icon*/
 /* Style for the list containing buttons */
 .panel ul {
     display: flex;
@@ -557,7 +989,6 @@ header h1 {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* 2 buttons per row */
     gap: 20px; /* Space between buttons */
-
     list-style: none; /* Remove bullets */
     margin: 20px 0;
 }
@@ -628,7 +1059,6 @@ footer {
 }
 
 select, option {
-    font-family: 'Dancing Script', cursive;
     font-size: 14px; /* Adjust size if necessary */
     color: #333; /* Text color */
     background-color: #f9f9f9; /* Background color for the dropdown */
@@ -638,27 +1068,13 @@ select, option {
 }
 /* General Admin Panel Styling */
 .view-logs-admin-panel {
-    font-family: 'Dancing Script', cursive;
     width: 80%; /* Adjusted width */
     max-width: 1000px; /* Maximum width */
     margin: 20px auto;
-    background-color: #ebd3f8;
-    border: 4px solid #AD49E1; /* Increased border size of the admin panel */
+    border: 1px solid #ddd; /* Increased border size of the admin panel */
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     overflow: hidden;
-}
-
-/* Fixed Header Styling */
-.view-logs-admin-panel-header {
-    background-color: #ebd3f8;
-    color: #2e073f;
-    text-align: center;
-    padding: 15px;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    border-bottom: 3px solid #7A1CAC; /* Increased border size for the header */
 }
 
 /* Scrollable Table Container */
@@ -673,9 +1089,116 @@ select, option {
 .view-logs-styled-table {
     width: 100%;
     font-size: 13px;
-    background-color: #ebd3f8;
     border-collapse: collapse; /* Ensures borders collapse between cells */
     table-layout: fixed; /* Fix the table layout, which helps in handling long text */
+}
+
+/* For tablets and smaller screens (768px and below) */
+@media (max-width: 768px) {
+    /* Header adjustments */
+    header h1 {
+        font-size: 1.5rem; /* Smaller font size */
+        flex-direction: column; /* Stack logo and text vertically */
+        gap: 5px;
+    }
+
+    .logo {
+        width: 50px; /* Smaller logo */
+    }
+
+    /* Container adjustments */
+    .container {
+        width: 90%; /* Expand to fit smaller screens */
+        padding: 15px; /* Reduce padding */
+    }
+
+    /* Admin, Manager, Employee panels */
+    .admin-panel, .manager-panel, .employee-panel {
+        max-width: 100%; /* Expand to full width */
+        margin: 10px auto; /* Reduce vertical margins */
+        padding: 10px;
+    }
+
+    .admin-header, .manager-header, .employee-header {
+        font-size: 1.2rem; /* Adjust header size */
+    }
+
+    /* Buttons */
+    .button-grid {
+        grid-template-columns: repeat(1, 1fr); /* Single column layout */
+    }
+
+    .button {
+        font-size: 0.8rem; /* Smaller text size */
+        width: auto; /* Adjust width */
+    }
+
+    /* Footer adjustments */
+    footer {
+        font-size: 0.8rem; /* Smaller text */
+        padding: 8px;
+    }
+
+    /* Table adjustments */
+    .view-logs-styled-table {
+        font-size: 12px; /* Smaller table text */
+    }
+
+    .view-logs-table-container {
+        max-height: 300px; /* Reduce table height */
+    }
+}
+
+/* For mobile screens (480px and below) */
+@media (max-width: 480px) {
+    /* Header adjustments */
+    header h1 {
+        font-size: 1.2rem; /* Smaller font size */
+    }
+
+    .logo {
+        width: 40px; /* Even smaller logo */
+    }
+
+    /* Container adjustments */
+    .container {
+        padding: 10px; /* Compact padding */
+    }
+
+    /* Admin, Manager, Employee panels */
+    .admin-panel, .manager-panel, .employee-panel {
+        padding: 8px; /* Reduce padding further */
+    }
+
+    .admin-header, .manager-header, .employee-header {
+        font-size: 1rem; /* Smaller header text */
+    }
+
+    /* Buttons */
+    .button {
+        font-size: 0.7rem; /* Compact button text */
+        padding: 8px 10px; /* Compact padding */
+    }
+
+    /* Footer adjustments */
+    footer {
+        font-size: 0.7rem; /* Smaller text */
+        padding: 5px; /* Compact padding */
+    }
+
+    /* Table adjustments */
+    .view-logs-styled-table {
+        font-size: 11px; /* Smaller table text */
+    }
+
+    .view-logs-table-container {
+        max-height: 250px; /* Further reduce table height */
+    }
+
+    /* Table cells adjustments */
+    .view-logs-styled-table th, .view-logs-styled-table td {
+        padding: 6px; /* Smaller padding for cells */
+    }
 }
 
 /* Table header */
@@ -738,27 +1261,13 @@ select, option {
 
 /* Specific Style for User Task Activity Summary */
 .user-task-summary-admin-panel {
-    font-family: 'Dancing Script', cursive;
     width: 80%; /* Adjusted width */
     max-width: 1000px; /* Maximum width */
     margin: 20px auto;
-    background-color: #ebd3f8; /* Lighter background color */
-    border: 3px solid #AD49E1; /* Purple border */
+    border: 1px solid #ddd; /* Purple border */
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     overflow: hidden;
-}
-
-/* Fixed Header Styling for User Task Activity Summary */
-.user-task-summary-admin-panel-header {
-    background-color: #ebd3f8;
-    color: #2e073f;
-    text-align: center;
-    padding: 15px;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    border-bottom: 3px solid #AD49E1; /* Border size for header */
 }
 
 /* Scrollable Table Container */
@@ -817,4 +1326,174 @@ select, option {
 /* Hover Effect */
 .user-task-summary-styled-table tr:hover {
     background-color: #AD49E1;
+}
+
+/* For tablets and smaller screens (768px and below) */
+@media (max-width: 768px) {
+    /* View Logs Table adjustments */
+    .view-logs-table-container, .user-task-summary-table-container {
+        max-height: 300px; /* Reduce height for smaller screens */
+        padding: 8px; /* Reduce padding */
+    }
+
+    .view-logs-styled-table, .user-task-summary-styled-table {
+        font-size: 12px; /* Smaller table text for better readability */
+    }
+
+    .view-logs-styled-table th, .user-task-summary-styled-table th {
+        padding: 10px; /* Reduce header padding */
+    }
+
+    .view-logs-styled-table td, .user-task-summary-styled-table td {
+        padding: 8px; /* Reduce cell padding */
+    }
+
+    .view-logs-styled-table tr:hover, .user-task-summary-styled-table tr:hover {
+        background-color: #9C3DB2; /* Adjust hover color */
+    }
+
+    /* Panels */
+    .view-logs-admin-panel, .user-task-summary-admin-panel {
+        width: 95%; /* Full width on smaller screens */
+        margin: 15px auto; /* Adjust margins */
+    }
+
+    .view-logs-admin-panel-header, .user-task-summary-admin-panel-header {
+        font-size: 0.9rem; /* Smaller header font */
+        padding: 10px; /* Compact padding */
+    }
+}
+
+/* For mobile screens (480px and below) */
+@media (max-width: 480px) {
+    /* View Logs Table adjustments */
+    .view-logs-table-container, .user-task-summary-table-container {
+        max-height: 80%; /* Further reduce height */
+    }
+
+    .view-logs-styled-table, .user-task-summary-styled-table {
+        font-size: 11px; /* Further reduce table text size */
+        max-height: 50%;
+    }
+
+    .view-logs-styled-table th, .user-task-summary-styled-table th {
+        padding: 8px; /* Further reduce header padding */
+    }
+
+    .view-logs-styled-table td, .user-task-summary-styled-table td {
+        padding: 6px; /* Compact cell padding */
+    }
+
+    /* Panels */
+    .view-logs-admin-panel, .user-task-summary-admin-panel {
+        width: 90%; /* Full width on mobile */
+        margin: 10px auto; /* Narrower margins */
+        padding: 8px; /* Compact padding */
+    }
+
+    .view-logs-admin-panel-header, .user-task-summary-admin-panel-header {
+        font-size: 0.8rem; /* Compact header font size */
+    }
+}
+
+/* Styling for the create-task-container */
+.create-task-container {
+    max-width: 600px; /* Max width of the form */
+    width: 100%; /* Make the form responsive */
+    margin: 0px auto; /* Center the form horizontally and add top margin */
+    padding: 20px;
+}
+
+.create-task-container h2 {
+    text-align: center;
+    color: white; /* Title color */
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.create-task-container .form-group {
+    margin-bottom: 20px;
+}
+
+.create-task-container .form-group label {
+    display: block;
+    color: white;
+    font-size: 1rem;
+    margin-bottom: 8px;
+}
+
+.create-task-container .form-group input, 
+.create-task-container .form-group textarea, 
+.create-task-container .form-group select {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.create-task-container .form-group input[type="date"] {
+    font-size: 0.9rem;
+}
+
+.create-task-container button {
+    background-color: #2E073F;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+.create-task-container button:hover {
+    background-color: #7A1CAC;
+}
+
+/* Media Query for Responsiveness */
+@media (max-width: 768px) {
+    .create-task-container {
+        padding: 15px;
+        max-width: 90%; /* Allow form to take up more space on smaller screens */
+    }
+
+    .create-task-container h2 {
+        font-size: 1.5rem; /* Reduce font size for smaller screens */
+    }
+
+    .create-task-container .form-group input,
+    .create-task-container .form-group textarea,
+    .create-task-container .form-group select {
+        font-size: 0.9rem; /* Adjust font size for smaller screens */
+    }
+
+    .create-task-container button {
+        padding: 8px 16px; /* Adjust padding for smaller screens */
+        font-size: 0.9rem; /* Adjust button font size */
+    }
+}
+
+@media (max-width: 480px) {
+    .create-task-container {
+        padding: 10px;
+        max-width: 95%; /* Allow form to take up nearly full screen width */
+    }
+
+    .create-task-container h2 {
+        font-size: 1.2rem; /* Further reduce font size */
+    }
+
+    .create-task-container .form-group input,
+    .create-task-container .form-group textarea,
+    .create-task-container .form-group select {
+        font-size: 0.8rem; /* Adjust font size further */
+    }
+
+    .create-task-container button {
+        padding: 8px 12px; /* Smaller padding for button */
+        font-size: 0.8rem; /* Smaller button font size */
+    }
 }

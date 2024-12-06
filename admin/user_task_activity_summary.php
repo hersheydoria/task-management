@@ -12,13 +12,10 @@ $summary = $stmt->fetchAll();
 ?>
 
 <?php include '../includes/header.php'; ?>
-
+<div class="container">
+<h2 style="color: white; font-family: 'Roboto Slab', serif;"><i class="fas fa-file-alt"></i> User Task Activity Summary</h2>
 <!-- Admin Panel for Task Activity Summary -->
 <div class="user-task-summary-admin-panel">
-    <!-- Fixed Header -->
-    <div class="user-task-summary-admin-panel-header">
-        <h2><i class="fas fa-file-alt"></i> User Task Activity Summary</h2>
-    </div>
 
     <!-- Scrollable Table Container with Specific Class for Styling -->
     <div class="user-task-summary-table-container">
@@ -50,6 +47,6 @@ $summary = $stmt->fetchAll();
         </table>
     </div>
 </div>
-
+</div>
 <?php include '../includes/footer.php'; ?>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">

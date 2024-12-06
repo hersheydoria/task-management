@@ -17,9 +17,10 @@ $tasks = $stmt->fetchAll();
 ?>
 <?php include '../includes/header.php'; ?>
 <div class="main-content">
-    <div class="tasks">
-        <h2>ALL TASKS</h2>
-        <table>
+    <div class="container">
+        <h2 style="font-family: 'Roboto Slab', serif; color: white;"><i class="fas fa-tasks"></i>  All Tasks</h2>
+        <div class="user-task-summary-admin-panel">
+        <table class="user-task-summary-styled-table">
             <thead>
                 <tr>
                     <th>Title</th>
@@ -45,15 +46,17 @@ $tasks = $stmt->fetchAll();
                         <td><?= htmlspecialchars($task['deadline'] ?? 'N/A') ?></td>
                         <td><?= $task['overdue'] ? 'Yes' : 'No' ?></td>
                         <td>
-                            <a href="edit_task.php?id=<?= htmlspecialchars($task['id'] ?? '') ?>">Edit</a> |
-                            <a href="delete_task.php?id=<?= htmlspecialchars($task['id'] ?? '') ?>" onclick="return confirm('Are you sure you want to delete this task?');">Delete</a> |
-                            <a href="view_comments.php?task_id=<?= htmlspecialchars($task['id'] ?? '') ?>">View Comments</a>
+                            <a href="edit_task.php?id=<?= htmlspecialchars($task['id'] ?? '') ?>" style="color:black">Edit</a> |
+                            <a href="delete_task.php?id=<?= htmlspecialchars($task['id'] ?? '') ?>" onclick="return confirm('Are you sure you want to delete this task?');" style="color:black">Delete</a> |
+                            <a href="view_comments.php?task_id=<?= htmlspecialchars($task['id'] ?? '') ?>" style="color:black">View Comments</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
+        </div>
     </div>
 </div>
 
 <?php include '../includes/footer.php'; ?>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">

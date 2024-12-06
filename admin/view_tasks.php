@@ -17,8 +17,9 @@ if (isset($_POST['priority']) && $_POST['priority'] !== '') {
 }
 
 if (isset($_POST['assigned_to']) && $_POST['assigned_to'] !== '') {
-    $whereClauses[] = "t.assigned_to = ?";
-    $params[] = $_POST['assigned_to'];
+    // Filter by assigned_to (user ID)
+    $whereClauses[] = "t.assigned_to = ?";  // Use assigned_to for filtering by user ID
+    $params[] = $_POST['assigned_to'];  // Pass the user ID selected from the form
 }
 
 if (isset($_POST['deadline']) && $_POST['deadline'] !== '') {
@@ -29,19 +30,16 @@ if (isset($_POST['deadline']) && $_POST['deadline'] !== '') {
 // Fetch tasks
 $query = "
     SELECT *
-    FROM all_user_task_summary(NULL);
+    FROM all_user_task_summary(NULL) t
 ";
 
 if (!empty($whereClauses)) {
-    $query .= " AND " . implode(" AND ", $whereClauses);
+    $query .= " WHERE " . implode(" AND ", $whereClauses);
 }
 
 $stmt = $pdo->prepare($query);
 $stmt->execute($params);
 $tasks = $stmt->fetchAll();
-
-
-
 
 // Fetch users for the "assigned to" filter
 $usersStmt = $pdo->prepare("SELECT id, username FROM users WHERE role = 'employee'");
@@ -49,18 +47,13 @@ $usersStmt->execute();
 $users = $usersStmt->fetchAll();
 
 // Fetch task status summary for all users
-$taskStatusSummaryStmt = $pdo->query("
-    SELECT *
-    FROM task_status_summary 
-");
+$taskStatusSummaryStmt = $pdo->query("SELECT * FROM task_status_summary");
 $taskStatusSummaries = $taskStatusSummaryStmt->fetchAll();
 ?>
-
 <?php include '../includes/header.php'; ?>
-
-<div class="admin-panel" style="font-family: 'Dancing Script', cursive;">
-    <h2> <i class="fas fa-tasks"></i> View All Tasks</h2>
-    
+<div class="container">
+<h2 style="color: white; font-family: 'Roboto Slab', serif;"> <i class="fas fa-tasks"></i> View All Tasks</h2>
+<div class="admin-panel" style="margin-top: 10px;">
     <!-- Filter Form -->
     <form method="POST">
         <div class="form-group">
@@ -69,18 +62,20 @@ $taskStatusSummaries = $taskStatusSummaryStmt->fetchAll();
                 <option value="" >All</option>
                 <option value="Low" <?= isset($_POST['priority']) && $_POST['priority'] === 'Low' ? 'selected' : '' ?> >Low</option>
                 <option value="Medium" <?= isset($_POST['priority']) && $_POST['priority'] === 'Medium' ? 'selected' : '' ?>>Medium</option>
-                <option value="High" <?= isset($_POST['priority']) && $_POST['priority'] === 'Hgh' ? 'selected' : '' ?>>High</option>
+                <option value="High" <?= isset($_POST['priority']) && $_POST['priority'] === 'High' ? 'selected' : '' ?>>High</option>
             </select>
         </div>
 
         <div class="form-group">
             <label for="assigned_to">Assigned to</label>
             <select name="assigned_to" id="assigned_to">
-                <option value="">All</option>
-                <?php foreach ($users as $user): ?>
-                    <option value="<?= $user['id'] ?>" <?= isset($_POST['assigned_to']) && $_POST['assigned_to'] == $user['id'] ? 'selected' : '' ?>><?= htmlspecialchars($user['username']) ?></option>
-                <?php endforeach; ?>
-            </select>
+            <option value="">All</option>
+            <?php foreach ($users as $user): ?>
+                <option value="<?= $user['id'] ?>" <?= isset($_POST['assigned_to']) && $_POST['assigned_to'] == $user['id'] ? 'selected' : '' ?>>
+                    <?= htmlspecialchars($user['username']) ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
         </div>
 
         <div class="form-group">
@@ -93,7 +88,8 @@ $taskStatusSummaries = $taskStatusSummaryStmt->fetchAll();
 
     <!-- Task List -->
     <h3>All Tasks</h3>
-    <table>
+    <div style="overflow-x: auto; margin: 20px 0;"> <!-- Added container for better responsiveness -->
+    <table style="width: 60%; margin: auto; border-collapse: collapse; text-align: center;"> <!-- Adjusted width and centered table -->
         <thead>
             <tr>
                 <th>Title</th>
@@ -120,6 +116,7 @@ $taskStatusSummaries = $taskStatusSummaryStmt->fetchAll();
             <?php endforeach; ?>
         </tbody>
     </table>
+</div>
     <!-- Generate Report Button -->
     <form method="POST" action="reports.php">
                 <button type="submit" class="report-button">Generate Report</button>
@@ -150,6 +147,6 @@ $taskStatusSummaries = $taskStatusSummaryStmt->fetchAll();
         </tbody>
     </table>
 </div>
-
+</div>
 <?php include '../includes/footer.php'; ?>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">

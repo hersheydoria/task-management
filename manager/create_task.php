@@ -31,8 +31,8 @@ $users = $stmt->fetchAll();
 
 <?php include '../includes/header.php'; ?>
 
-<div class="form-container">
-    <h2>Create New Task</h2>
+<div class="create-task-container">
+    <h2 style="font-family: 'Roboto Slab', serif;"><i class="fas fa-pencil-alt"></i> Create New Task</h2>
 
     <form method="POST" action="create_task.php">
         <div class="form-group">
@@ -73,3 +73,4 @@ $users = $stmt->fetchAll();
     </form>
 </div>
 <?php include '../includes/footer.php'; ?>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">

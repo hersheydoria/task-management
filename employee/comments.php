@@ -50,7 +50,7 @@ $comments = $commentsStmt->fetchAll();
 <?php include '../includes/header.php'; ?>
 
 <div class="comments">
-    <h2>COMMENTS FOR TASK: <?= htmlspecialchars($task['title']) ?></h2>
+    <h2 style="font-family: 'Roboto Slab', serif;"> <i class="fas fa-comments"></i> COMMENTS FOR TASK: <?= htmlspecialchars($task['title']) ?></h2>
 
     <!-- Comment Form -->
     <form method="POST">
@@ -71,3 +71,4 @@ $comments = $commentsStmt->fetchAll();
 </div>
 
 <?php include '../includes/footer.php'; ?>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">

@@ -41,8 +41,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <?php include '../includes/header.php'; ?>
 
-<div class="form-container">
-    <h2>Update Task Status</h2>
+<div>
+<h2 style="color: white; text-align: center; font-family: 'Roboto Slab', serif;"> <i class="fas fa-pencil-alt"></i> Update Task Status</h2>
     <form method="POST">
         <div class="form-group">
             <label for="status">Status</label>
@@ -57,3 +57,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 
 <?php include '../includes/footer.php'; ?>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">

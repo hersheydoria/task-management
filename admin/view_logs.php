@@ -21,15 +21,10 @@
     $stmt->execute();
     $logs = $stmt->fetchAll();
     ?>
-
     <?php include '../includes/header.php'; ?>
-
+    <div class="container">
+    <h2 style="color: white; font-family: 'Roboto Slab', serif;"><i class="fas fa-book"></i> System Logs</h2>
     <div class="view-logs-admin-panel">
-        <!-- Fixed Header -->
-        <div class="view-logs-admin-panel-header">
-            <h2><i class="fas fa-book"></i> System Logs</h2>
-        </div>
-
         <!-- Scrollable Table Container with Specific Class for Styling -->
         <div class="view-logs-table-container">
             <table class="view-logs-styled-table">
@@ -60,6 +55,6 @@
             </table>
         </div>
     </div>
-
+    </div>
     <?php include '../includes/footer.php'; ?>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
