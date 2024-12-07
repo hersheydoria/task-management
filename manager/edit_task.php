@@ -50,17 +50,17 @@ $users = $usersStmt->fetchAll();
 
     <form method="POST">
         <div class="form-group">
-            <label for="title">Title</label>
+            <label for="title" style="color:white">Title</label>
             <input type="text" name="title" id="title" value="<?= htmlspecialchars($task['title']) ?>" required>
         </div>
 
         <div class="form-group">
-            <label for="description">Description</label>
+            <label for="description" style="color:white">Description</label>
             <textarea name="description" id="description" rows="4" required><?= htmlspecialchars($task['description']) ?></textarea>
         </div>
 
         <div class="form-group">
-            <label for="assigned_to">Assigned To</label>
+            <label for="assigned_to" style="color:white">Assigned To</label>
             <select name="assigned_to" id="assigned_to" required>
                 <option value="">Select an employee</option>
                 <?php foreach ($users as $user): ?>
@@ -72,7 +72,7 @@ $users = $usersStmt->fetchAll();
         </div>
 
         <div class="form-group">
-            <label for="priority">Priority</label>
+            <label for="priority" style="color:white">Priority</label>
             <select name="priority" id="priority" required>
                 <option value="Low" <?= $task['priority'] === 'Low' ? 'selected' : '' ?>>Low</option>
                 <option value="Medium" <?= $task['priority'] === 'Medium' ? 'selected' : '' ?>>Medium</option>
@@ -81,7 +81,7 @@ $users = $usersStmt->fetchAll();
         </div>
 
         <div class="form-group">
-            <label for="deadline">Deadline</label>
+            <label for="deadline" style="color:white">Deadline</label>
             <input type="date" name="deadline" id="deadline" value="<?= $task['deadline'] ?>" required>
         </div>
 
