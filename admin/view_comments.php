@@ -3,21 +3,19 @@ session_start();
 include '../includes/db.php';
 include '../includes/auth.php';
 
-// Check if the user has 'manager' role
-requireRole('manager');
+// Check if the user has 'admin' role 
+requireRole('admin');
 
 $user_id = $_SESSION['user_id'];
 $pdo->exec("SET myapp.current_user_id = '$user_id'");
 
-// Fetch task ID from the query string
-if (!isset($_GET['task_id']) || !is_numeric($_GET['task_id'])) {
+// Check if task_id is set and is a valid number
+if (!isset($_GET['task_id']) || !is_numeric($_GET['task_id']) || empty($_GET['task_id'])) {
     echo "Invalid task ID.";
     exit;
 }
-
 $task_id = (int)$_GET['task_id'];
-
-// Fetch task details
+// Fetch task details from the database
 $taskStmt = $pdo->prepare("SELECT title FROM tasks WHERE id = ?");
 $taskStmt->execute([$task_id]);
 $task = $taskStmt->fetch();
@@ -32,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the comment from the form
     $comment = htmlspecialchars(trim($_POST['comment']));
 
-    // Get the current user's ID (manager)
+    // Get the current user's ID (admin)
     $user_id = $_SESSION['user_id'];
 
     // Insert the comment into the database
@@ -48,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $commentsStmt = $pdo->prepare("SELECT c.comment, c.created_at, u.username 
                                FROM comments c 
                                JOIN users u ON c.user_id = u.id 
-                               WHERE c.task_id = ?
+                               WHERE c.task_id = ? 
                                ORDER BY c.created_at DESC");
 $commentsStmt->execute([$task_id]);
 $comments = $commentsStmt->fetchAll();
@@ -57,9 +55,9 @@ $comments = $commentsStmt->fetchAll();
 <?php include '../includes/header.php'; ?>
 
 <div class="comments">
-<h2 style="font-family: 'Roboto Slab', serif;"> <i class="fas fa-comments"></i> COMMENTS FOR TASK: <?= htmlspecialchars($task['title']) ?></h2>
+    <h2 style="font-family: 'Roboto Slab', serif;"> <i class="fas fa-comments"></i> COMMENTS FOR TASK: <?= htmlspecialchars($task['title']) ?></h2>
 
-    <!-- Comment Form (for managers) -->
+    <!-- Comment Form (for admins) -->
     <form method="POST">
         <textarea name="comment" rows="4" placeholder="Add your comment here..." required></textarea>
         <button type="submit">Add Comment</button>
@@ -78,6 +76,9 @@ $comments = $commentsStmt->fetchAll();
             <?php endforeach; ?>
         </ul>
     <?php endif; ?>
+
+    <a href="view_tasks.php" style="color: white;">Back to Tasks</a>
 </div>
+
 <?php include '../includes/footer.php'; ?>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">

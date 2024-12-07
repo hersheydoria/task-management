@@ -32,6 +32,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $old_role = $user['role'];
                 $username = $user['username'];
 
+                // Check if the role is being updated to 'manager'
+                if ($old_role !== 'manager' && $new_role === 'manager') {
+                    // Fetch the user ID based on the username
+                    $userStmt = $pdo->prepare("SELECT id FROM users WHERE username = ?");
+                    $userStmt->execute([$username]);
+                    $user = $userStmt->fetch();
+
+                    if ($user) {
+                        $userId = $user['id'];
+
+                        // Delete tasks where the assigned_to is the user ID
+                        $deleteTasksStmt = $pdo->prepare("DELETE FROM tasks WHERE assigned_to = ?");
+                        $deleteTasksStmt->execute([$userId]);
+                    } else {
+                        $error = "User not found.";
+                    }
+                }
+
                 // Update the user's role
                 $updateStmt = $pdo->prepare("UPDATE users SET role = ? WHERE id = ? AND role != 'admin'");
                 $updateStmt->execute([$new_role, $user_id]);
@@ -66,7 +84,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $error = "Error: " . $e->getMessage();
         }
     }
-    
 }
 
 // Fetch the updated users list

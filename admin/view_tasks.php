@@ -27,7 +27,7 @@ if (isset($_POST['deadline']) && $_POST['deadline'] !== '') {
     $params[] = $_POST['deadline'];
 }
 
-// Fetch tasks
+// Fetch tasks with created_by_name
 $query = "
     SELECT *
     FROM all_user_task_summary(NULL) t
@@ -97,6 +97,7 @@ $taskStatusSummaries = $taskStatusSummaryStmt->fetchAll();
                 <th>Status</th>
                 <th>Deadline</th>
                 <th>Assigned To</th>
+                <th>Created By</th> <!-- Added "Created By" column -->
                 <th>Actions</th>
             </tr>
         </thead>
@@ -108,9 +109,11 @@ $taskStatusSummaries = $taskStatusSummaryStmt->fetchAll();
                     <td><?= htmlspecialchars($task['status']) ?></td>
                     <td><?= htmlspecialchars($task['deadline']) ?></td>
                     <td><?= htmlspecialchars($task['assigned_to_name']) ?></td>
+                    <td><?= htmlspecialchars($task['created_by_name']) ?></td> <!-- Display creator's name -->
                     <td>
                         <a href="edit_task.php?id=<?= $task['task_id'] ?>">Edit</a> | 
                         <a href="delete_task.php?id=<?= $task['task_id'] ?>" onclick="return confirm('Are you sure you want to delete this task?');">Delete</a>
+                        <a href="view_comments.php?task_id=<?= htmlspecialchars($task['task_id'] ?? '') ?>">View Comments</a>
                     </td>
                 </tr>
             <?php endforeach; ?>
